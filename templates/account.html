@@ -1,0 +1,126 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light navc">
+  <a class="navbar-brand" href="/">Flask Authentication</a>
+  <div class="collapse navbar-collapse">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('get_all_posts') }}">Home</a>
+      </li>
+
+    </ul>
+  </div>
+</nav>
+
+<div class="container">
+<div class="row gutters">
+	<div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+		<div class="card h-100">
+			<div class="card-body">
+				<div class="account-settings">
+					<div class="user-profile">
+						<div class="user-avatar">
+							<img src="{{ image_file}}" alt="Maxwell Admin">
+						</div>
+						<h5 class="user-name">{{current_user.name}}</h5>
+						<h6 class="user-email">{{current_user.email}}</h6>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+		<div class="card h-100">
+			<div class="card-body">
+				<div class="row gutters">
+					<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+						<h6 class="mb-3 text-primary">Personal Details</h6>
+					</div>
+					<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+
+
+						<div class="form-group">
+
+<form method="POST" action="" enctype="multipart/form-data">
+          <!-- اللي تحت هذا حق التشفير app.config["SECRET_KEY"] -->
+        {{form.hidden_tag() }}
+        <fieldset class="form-group">
+          <legend class="border-bottom mb-4">Account Info</legend>
+
+
+
+
+          <div class="form-group">
+               <!-- الكلاس اللي هنا تبع بوت سترايب لكن الفورم تبع wtf form -->
+            {{form.username.label(class="form-control-label")}}
+               <!-- لو فيه خطا في الفورم كتبنا الكود هذا عشان يوضحه لليوزر  -->
+              {% if form.username.errors %}
+               {{form.username(class="form-control form-control-lg is-invalid")}}
+              <div class="invalid-feedback">
+                  {% for error in form.username.errors %}
+                  <span>{{error }}</span>
+                  {% endfor %}
+              </div>
+              {%else%}
+               {{form.username(class="form-control form-control-lg")}}
+              {% endif %}
+
+          </div>
+
+
+
+           <div class="form-group">
+               <!-- الكلاس اللي هنا تبع بوت سترايب لكن الفورك تبع wtf form -->
+            {{form.email.label(class="form-control-label")}}
+               <!-- لو فيه خطا في الفورم كتبنا الكود هذا عشان يوضحه لليوزر  -->
+              {% if form.email.errors %}
+               {{form.email(class="form-control form-control-lg is-invalid")}}
+              <div class="invalid-feedback">
+                  {% for error in form.email.errors %}
+                  <span>{{error }}</span>
+                  {%endfor %}
+              </div>
+              {%else%}
+               {{form.email(class="form-control form-control-lg")}}
+              {% endif %}
+
+          </div>
+
+
+
+ <!-- update pic -->
+            <div class="form-group">
+                    {{ form.picture.label() }}
+                    {{ form.picture(class="form-control-file") }}
+                    {% if form.picture.errors %}
+                        {% for error in form.picture.errors %}
+                            <span class="text-danger">{{ error }}</span></br>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+
+        </fieldset>
+        <div class="form-group">
+          {{form.submit(class="btn btn-outline-info")}}
+        </div>
+      </form>
+
+
+
+					</div>
+				</div>
+
+				</div>
+
+
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+</body>
+</html>
